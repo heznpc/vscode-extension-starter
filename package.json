@@ -1,0 +1,39 @@
+{
+  "name": "my-extension",
+  "displayName": "My Extension",
+  "description": "A VS Code extension",
+  "version": "0.1.0",
+  "publisher": "my-publisher",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "my-extension.helloWorld",
+        "title": "Hello World"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint src/",
+    "test": "jest --verbose --passWithNoTests",
+    "package": "vsce package",
+    "version:patch": "node scripts/bump-version.js patch",
+    "version:minor": "node scripts/bump-version.js minor",
+    "version:major": "node scripts/bump-version.js major"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@vscode/vsce": "^3.2.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
+    "jest": "^30.2.0",
+    "ovsx": "^0.10.0"
+  }
+}

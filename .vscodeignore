@@ -1,0 +1,12 @@
+.github/**
+node_modules/**
+test/**
+docs/**
+scripts/**
+eslint.config.js
+.gitignore
+.DS_Store
+.env
+.idea/
+*.md
+!README.md
