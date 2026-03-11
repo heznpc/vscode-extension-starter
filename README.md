@@ -39,7 +39,7 @@ npm install
 │   ├── extension.js              # Main entry (activate/deactivate)
 │   └── commands/
 │       └── helloWorld.js         # Example command
-├── test/
+├── tests/
 │   ├── __mocks__/
 │   │   └── vscode.js            # VS Code API mock for Jest
 │   └── extension.test.js        # Structure tests (Jest)

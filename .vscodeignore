@@ -1,6 +1,6 @@
 .github/**
 node_modules/**
-test/**
+tests/**
 docs/**
 scripts/**
 eslint.config.js
