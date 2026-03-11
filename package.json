@@ -3,12 +3,14 @@
   "displayName": "My Extension",
   "description": "A VS Code extension",
   "version": "0.1.0",
+  "private": true,
   "publisher": "my-publisher",
   "repository": {
     "type": "git",
     "url": "https://github.com/heznpc/vscode-extension-starter"
   },
   "engines": {
+    "node": ">=20",
     "vscode": "^1.85.0"
   },
   "categories": [
@@ -37,11 +39,11 @@
     }
   },
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
+    "@eslint/js": "^9.39.4",
     "@vscode/vsce": "^3.2.0",
-    "eslint": "^9.0.0",
-    "globals": "^15.0.0",
-    "jest": "^30.2.0",
+    "eslint": "^9.39.4",
+    "globals": "^17.4.0",
+    "jest": "^29.7.0",
     "ovsx": "^0.10.0"
   }
 }

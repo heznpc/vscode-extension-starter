@@ -45,7 +45,7 @@ jobs:
 
           ## Recommended
           - [ ] Add your own commands in `src/commands/`
-          - [ ] Write tests in `test/` and run with `npm test`
+          - [ ] Write tests in `tests/` and run with `npm test`
           - [ ] Update `CHANGELOG.md` with your changes
           - [ ] Delete this issue when done
 
