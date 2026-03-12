@@ -3,6 +3,10 @@ name: Publish Extension
 on:
   workflow_dispatch:
 
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -39,6 +43,13 @@ jobs:
             exit 1
           fi
 
+      - name: Validate secrets
+        run: |
+          if [ -z "${{ secrets.VSCE_PAT }}" ]; then
+            echo "::error::Missing required secret: VSCE_PAT — See docs/MARKETPLACE_SETUP.md"
+            exit 1
+          fi
+
       - name: Build .vsix
         run: npx vsce package --no-dependencies
 
@@ -62,6 +73,7 @@ jobs:
         with:
           name: extension-v${{ steps.version.outputs.version }}
           path: '*.vsix'
+          retention-days: 30
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

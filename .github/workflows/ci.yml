@@ -13,13 +13,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Scan for secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
+      - name: Check for large files
+        run: |
+          LARGE=$(find . -not -path './.git/*' -not -path './node_modules/*' -type f -size +5M)
+          if [ -n "$LARGE" ]; then
+            echo "::error::Large files detected (>5 MB):"
+            echo "$LARGE"
+            exit 1
+          fi
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Check licenses
+        run: npx license-checker --failOn "GPL-2.0;GPL-3.0;AGPL-3.0"
 
       - name: Security audit
         run: npm audit --audit-level=high
@@ -36,4 +53,8 @@ jobs:
           VSIX=$(ls *.vsix)
           SIZE=$(stat -c%s "$VSIX" 2>/dev/null || stat -f%z "$VSIX")
           echo "Package: $VSIX ($((SIZE / 1024)) KB)"
+          if [ "$SIZE" -gt 5242880 ]; then
+            echo "::error::VSIX exceeds 5 MB ($((SIZE / 1024 / 1024)) MB) — add files to .vscodeignore"
+            exit 1
+          fi
           rm -f "$VSIX"
